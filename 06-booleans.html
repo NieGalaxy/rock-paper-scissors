@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+<style>
+    body{
+    background-color: rgb(49, 46, 46); 
+}
+h1{
+    color: white;
+}
+.rock{
+    height: 100px;
+    float:left;
+}
+.paper{
+    height: 100px;
+    float:left;
+}
+.scissors{
+    height: 100px;
+    float:left;
+}
+#wynik{
+position: absolute;
+top:300px;
+left:0px;
+}
+#wynik_lose{
+    position: absolute;
+    top:300px;
+    left:120px;
+}
+#wynik_win{
+    position: absolute;
+    top:300px;
+    left:120px;
+}
+#wynik_tie{
+    position: absolute;
+    top:300px;
+    left:120px;
+}
+#you{
+    color:white;
+    position: absolute;
+    top: 400px;
+    left:0;
+
+}
+#rockmini1{
+    height:50px;
+    position: absolute;
+    top:400px;
+    left: 40px;
+}
+#papermini1{
+    height:50px;
+    position: absolute;
+    top:400px;
+    left: 40px;
+}
+#scissorsmini1{
+    height:50px;
+    position: absolute;
+    top:400px;
+    left: 40px;
+}
+#rockmini2{
+    height:50px;
+    position: absolute;
+    top:400px;
+    left:90px;
+}
+#papermini2{
+    height:50px;
+    position: absolute;
+    top:400px;
+    left: 90px;
+}
+#scissorsmini2{
+    height:50px;
+    position: absolute;
+    top:400px;
+    left: 90px;
+}
+#computer{
+    color:white;
+    position: absolute;
+    top: 400px;
+    left:150px;
+}
+</style>
+</head>
+<body>
+    <header><h1>Rock Paper Scissors</h1><br></header>
+    
+    <img onclick="rock1()"class="rock" src="rock-emoji.png" alt="rock">
+    <img onclick="paper1()" class="paper" src="paper-emoji.png" alt="paper">
+    <img onclick="scissors1()" class="scissors" src="scissors-emoji.png" alt="scissors">
+    <h1 id="wynik">Wynik:  </h1> 
+    <h1 id="wynik_win">you win</h1> 
+    <h1 id="wynik_lose">you lose</h1>
+    <h1 id="wynik_tie">tie</h1>
+    <h2 id="you">You</h2>
+    <img src="rock-emoji.png" id="rockmini1" alt="rock">
+    <img src="paper-emoji.png" id="papermini1" alt="paper">
+    <img src="scissors-emoji.png" id="scissorsmini1" alt="scissors">
+    <img src="rock-emoji.png" id="rockmini2" alt="rock">
+    <img src="paper-emoji.png" id="papermini2" alt="paper">
+    <img src="scissors-emoji.png" id="scissorsmini2" alt="scissors">
+    <h2 id="computer">Computer</h2>
+  
+    <script>
+    let rock , paper,scissors;
+    let computer = Math.random();
+
+    const win=document.getElementById("wynik_win");
+    const lose=document.getElementById("wynik_lose");
+    const tie=document.getElementById("wynik_tie");
+
+    const rockmini1=document.getElementById("rockmini1");
+    const papermini1=document.getElementById("papermini1");
+    const scissorsmini1=document.getElementById("scissorsmini1")
+
+    const rockmini2=document.getElementById("rockmini2");
+    const papermini2=document.getElementById("papermini2");
+    const scissorsmini2=document.getElementById("scissorsmini2")
+
+    function ukrycie(){
+        win.style.display='none';
+        lose.style.display='none';
+        tie.style.display='none';
+    }
+    function wygrana(){
+        win.style.display="block";
+    }
+    function przegrana(){
+        lose.style.display="block";
+    }
+    function remis(){
+        tie.style.display="block";
+    }
+    function ukrycieYou(){
+        rockmini1.style.display="none";
+        papermini1.style.display="none";
+        scissorsmini1.style.display="none";
+    }
+    function ukrycieComputer(){
+        rockmini2.style.display="none";
+        papermini2.style.display="none";
+        scissorsmini2.style.display="none";
+
+    }
+    function showrock(){
+        rockmini2.style.display="block";
+    }
+    function showpaper(){
+        papermini2.style.display="block";
+    }
+    function showscissors(){
+        scissorsmini2.style.display="block"; 
+    }
+    ukrycieYou();
+    ukrycieComputer();
+    ukrycie();
+    //0,0 do 0,33 rock
+    //0,34 do 0,66 paper
+    //0,67 do 1 scissor
+    function rock1() {
+        ukrycieYou();
+        ukrycieComputer();
+        ukrycie();
+        rockmini1.style.display="block";
+       if(computer >=0.67){
+        ukrycieComputer();
+        showscissors();
+        console.log("you win computer have scissors "+computer);
+          wygrana();
+        computer = Math.random();
+       }else if (computer >=0.34) {
+        console.log("you lose computer have paper "+computer);
+        ukrycieComputer();
+        showpaper();
+        przegrana();
+        computer = Math.random();
+       }else{
+        console.log("tie computer have rock "+computer);
+        ukrycieComputer();
+        showrock()
+        remis();
+        computer = Math.random();
+       }
+
+       
+    }
+    function paper1() {
+        ukrycie();
+        ukrycieYou();
+        ukrycieComputer();
+        papermini1.style.display="block";
+        if(computer >=0.67){
+        console.log("you lose computer have scissors "+computer);
+        ukrycieComputer();
+        showscissors();
+        przegrana();
+        computer = Math.random();
+       }else if (computer >=0.34) {
+        console.log("tie computer have paper "+computer);
+        ukrycieComputer();
+        showpaper();
+        remis();
+        computer = Math.random();
+       }else{
+        console.log("you win computer have rock "+computer);
+        ukrycieComputer();
+        showrock()
+        wygrana();
+
+        computer = Math.random();
+       }
+
+       
+    }
+    function scissors1() {
+        ukrycie();
+        ukrycieYou();
+        ukrycieComputer();
+        scissorsmini1.style.display='block';
+        
+        if(computer >=0.67){
+        console.log("tie computer have scissors "+computer);
+        ukrycieComputer();
+        showscissors();
+        remis();
+        computer = Math.random();
+       }else if (computer >=0.34) {
+        console.log("you win computer have paper "+computer);
+        ukrycieComputer();
+        showpaper();
+        wygrana();
+        computer = Math.random();
+       }else{
+        console.log("you lose computer have rock "+computer);
+        ukrycieComputer();
+        showrock()
+        przegrana();
+        computer = Math.random();
+       }
+
+       
+    }
+
+    </script>
+</body>
+</html>
